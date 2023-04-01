@@ -1,0 +1,15 @@
+type Review {
+    ID: Number,
+    RatingID: Number,
+    Comment: String,
+    Movie: Movie
+}
+
+type Movie {
+    ID: Number,
+    MovieName: String,
+    Description: String,
+    DirectorName: String,
+    ReleaseDate: Date,
+    reviews: [Review]
+}
