@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize';
 
-export const sequelize = new Sequelize('movie', 'postgres', 'admin', {
+const sequelize = new Sequelize('movie', 'postgres', 'admin', {
     host: 'localhost',
     dialect: 'postgres'
 });
 
-export const testDbConnection = async () => {
+const testDbConnection = async () => {
     try {
         await sequelize.authenticate();
         console.log("Connection has been established successfully.");
@@ -13,3 +13,7 @@ export const testDbConnection = async () => {
         console.error("Unable to connect to the database:", error);
     }
 };
+
+export default {
+    sequelize, testDbConnection
+}

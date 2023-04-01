@@ -1,8 +1,8 @@
-import { sequelize as sq } from "../config/db";
+import db from "../config/db";
 import { DataTypes } from 'sequelize';
 import Review from "./review";
 
-const Movie = sq.define("movie", {
+const Movie = db.sequelize.define("movie", {
   ID: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -26,5 +26,6 @@ Movie.hasMany(Review, {
   foreignKey: 'MovieID'
 })
 
-Movie.sync({ alter: true })
+Movie.sync({ alter: true });
+
 export default Movie;

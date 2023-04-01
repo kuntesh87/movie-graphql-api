@@ -1,8 +1,8 @@
-import {  sequelize as sq } from "../config/db";
+import db from "../config/db";
 import { DataTypes } from 'sequelize';
 import Review from "./review";
 
-const User = sq.define("user", {
+const User = db.sequelize.define("user", {
   ID: {
     type: DataTypes.INTEGER,
     primaryKey: true,

@@ -1,6 +1,5 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { testDbConnection } from "./config/db";
 import { getAllMovies } from './controllers/movie';
 
 
@@ -51,5 +50,4 @@ const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
 });
 
-testDbConnection();
 console.log(`🚀  Server ready at: ${url}`);
