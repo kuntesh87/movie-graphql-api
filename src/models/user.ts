@@ -6,6 +6,7 @@ export const User = sequelize().define("user", {
   ID: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   EmailID: {
     type: DataTypes.STRING,

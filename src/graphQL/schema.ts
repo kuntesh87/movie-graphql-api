@@ -1,8 +1,9 @@
 const typeDefs = `#graphql
   type User {
-    id: Int!
-    name: String!
-    email: String!
+    ID: Int!
+    EmailID: String!
+    UserName: String!
+    token: String!
   }
 
   type Review {
@@ -21,13 +22,15 @@ const typeDefs = `#graphql
 }
   type Query {
     user(id: Int!): User
+    allUser: [User!]!
     allReviews: [Review!]!
     review(id: Int!): Review
     allMovie: [Movie!]!
   }
 
   type Mutation {
-    createUser(name: String!, email: String!, password: String!): User!
+    login(email: String!): User!,
+    createUser(UserName: String!, EmailID: String!, Password: String!): User!
     createReview(
       userId: Int!
       title: String!
