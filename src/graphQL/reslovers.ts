@@ -10,7 +10,10 @@ const resolvers = {
         async review(root, { id }, { models }) {
             return models.Review.findById(id);
         },
+        async allMovie(root, { id }, { models }) {
+            return models.Movie.findAll();
+        },
     },
-  };
+};
 
 export default resolvers;  

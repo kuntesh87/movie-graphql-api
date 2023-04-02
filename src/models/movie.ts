@@ -26,4 +26,18 @@ Movie.hasMany(Review, {
   foreignKey: 'MovieID'
 })
 
+const movie = {
+  ID: '1',
+  MovieName: 'test',
+  Description: "Test Description",
+  DirectorName: 'Kuntesh',
+  ReleaseDate: new Date()
+}
+Movie.findOrCreate({
+  where: { ID: movie.ID },
+  defaults: {
+    ...movie
+  }
+});
+
 Movie.sync({ alter: true });

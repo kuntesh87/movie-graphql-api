@@ -3,21 +3,27 @@ const typeDefs = `#graphql
     id: Int!
     name: String!
     email: String!
-    reviews: [Review!]!
   }
 
   type Review {
-    id: Int!
-    title: String!
-    ingredients: String!
-    direction: String!
-    user: User!
+    ID: Int,
+    RatingID: Int,
+    Comment: String,
   }
 
+  type Movie {
+    ID: Int,
+    MovieName: String,
+    Description: String,
+    DirectorName: String,
+    ReleaseDate: String,
+    reviews: [Review]
+}
   type Query {
     user(id: Int!): User
     allReviews: [Review!]!
-    Review(id: Int!): Review
+    review(id: Int!): Review
+    allMovie: [Movie!]!
   }
 
   type Mutation {
