@@ -1,8 +1,8 @@
-import db from "../config/db";
+import { sequelize} from "../config/db.js";
 import { DataTypes } from 'sequelize';
-import Review from "./review";
+import { Review } from "./review.js";
 
-const User = db.sequelize.define("user", {
+export const User = sequelize().define("user", {
   ID: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -25,4 +25,3 @@ User.hasMany(Review, {
 
 User.sync({ alter: true })
 
-export default User;

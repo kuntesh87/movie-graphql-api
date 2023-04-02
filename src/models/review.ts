@@ -1,7 +1,7 @@
-import db from "../config/db";
+import { sequelize} from "../config/db.js";
 import { DataTypes } from 'sequelize';
 
-const Review = db.sequelize.define("review", {
+export const Review = sequelize().define("review", {
     ID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -18,4 +18,3 @@ const Review = db.sequelize.define("review", {
 Review.sync({ alter: true })
 
 
-export default Review;

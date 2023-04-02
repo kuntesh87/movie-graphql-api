@@ -1,8 +1,8 @@
-import db from "../config/db";
+import { sequelize } from "../config/db.js";
 import { DataTypes } from 'sequelize';
-import Review from "./review";
+import { Review } from "./review.js";
 
-const Movie = db.sequelize.define("movie", {
+export const Movie = sequelize().define("movie", {
   ID: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -27,5 +27,3 @@ Movie.hasMany(Review, {
 })
 
 Movie.sync({ alter: true });
-
-export default Movie;

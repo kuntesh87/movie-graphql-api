@@ -1,13 +1,13 @@
 {
-  "include": ["src/**/*.ts", "tests/**/*.ts"],
-  "exclude": ["node_modules", ".vscode"], 
+  "include": ["src/**/*"],
   "compilerOptions": {
     "rootDirs": ["src"],
     "outDir": "dist",
     "lib": ["es2020"],
     "target": "es2020",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "node16",
+    "baseUrl": ".",
     "esModuleInterop": true,
     "types": ["node"]
   }
