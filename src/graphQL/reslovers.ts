@@ -179,7 +179,7 @@ const resolvers = {
 
                 });
             try {
-                const movie = await updateReview(args);
+                const movie = await updateReview(args,user);
                 return movie;
             } catch (err) {
                 console.log("error in updateMovie", err);
