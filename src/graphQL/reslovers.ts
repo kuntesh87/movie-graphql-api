@@ -27,7 +27,27 @@ const resolvers = {
         },
         createUser: async (root, { EmailID, UserName, Password }, { models }) => {
             try {
-                const user = await models.User.create({ ID: 2, EmailID, UserName, Password });
+                const user = await models.User.create({ EmailID, UserName, Password });
+                return user;
+            } catch (err) {
+                console.log("error in createUser", err);
+                return null;
+
+            }
+        },
+        createReview: async (root, { ID, RatingID, Comment, UserID, MovieID }, { models }) => {
+            try {
+                const user = await models.User.create({ ID, RatingID, Comment, UserID, MovieID });
+                return user;
+            } catch (err) {
+                console.log("error in createUser", err);
+                return null;
+
+            }
+        },
+        createMovie: async (root, { MovieName, Description, DirectorName, ReleaseDate }, { models }) => {
+            try {
+                const user = await models.User.create({ MovieName, Description, DirectorName, ReleaseDate });
                 return user;
             } catch (err) {
                 console.log("error in createUser", err);

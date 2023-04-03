@@ -5,6 +5,7 @@ export const Review = sequelize().define("review", {
     ID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     RatingID: {
         type: DataTypes.INTEGER,

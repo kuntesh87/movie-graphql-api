@@ -10,6 +10,8 @@ const typeDefs = `#graphql
     ID: Int,
     RatingID: Int,
     Comment: String,
+    UserID: Int,
+    MovieID: Int,
   }
 
   type Movie {
@@ -31,12 +33,8 @@ const typeDefs = `#graphql
   type Mutation {
     login(email: String!): User!,
     createUser(UserName: String!, EmailID: String!, Password: String!): User!
-    createReview(
-      userId: Int!
-      title: String!
-      ingredients: String!
-      direction: String!
-    ): Review!
+    createReview(ID: Int, RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Review!
+    createMovie(ID: Int,MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!
   }
 `;
 

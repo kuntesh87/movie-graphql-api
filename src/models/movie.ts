@@ -5,6 +5,7 @@ import { Review } from "./review.js";
 export const Movie = sequelize().define("movie", {
   ID: {
     type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
   },
   MovieName: {
