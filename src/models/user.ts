@@ -20,9 +20,5 @@ export const User = sequelize().define("user", {
   },
 });
 
-User.hasMany(Review, {
-  foreignKey: 'UserID'
-})
-
 User.sync({ alter: true })
 

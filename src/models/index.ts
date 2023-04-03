@@ -1,9 +1,9 @@
+import { User } from "./user.js";
 import { Movie } from "./movie.js";
 import { Review } from "./review.js";
-import { User } from "./user.js";
 
 export {
+    User,
     Movie,
     Review,
-    User
 }

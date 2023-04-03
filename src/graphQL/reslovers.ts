@@ -5,16 +5,22 @@ const resolvers = {
             return models.User.findById(id);
         },
         async allUser(root, args, { models }) {
-            return models.User.findAll();
+            return models.User.findAll({
+                include: models.Review
+            });
         },
         async allReviews(root, args, { models }) {
-            return models.Review.findAll();
+            return models.Review.findAll({
+                include: models.Review
+            });
         },
         async review(root, { id }, { models }) {
             return models.Review.findById(id);
         },
         async allMovie(root, { id }, { models }) {
-            return models.Movie.findAll();
+            return models.Movie.findAll({
+                include: models.Review
+            });
         },
     },
     Mutation: {
@@ -37,20 +43,20 @@ const resolvers = {
         },
         createReview: async (root, { ID, RatingID, Comment, UserID, MovieID }, { models }) => {
             try {
-                const user = await models.User.create({ ID, RatingID, Comment, UserID, MovieID });
-                return user;
+                const review = await models.Review.create({ ID, RatingID, Comment, UserID, MovieID });
+                return review;
             } catch (err) {
-                console.log("error in createUser", err);
+                console.log("error in createReview", err);
                 return null;
 
             }
         },
         createMovie: async (root, { MovieName, Description, DirectorName, ReleaseDate }, { models }) => {
             try {
-                const user = await models.User.create({ MovieName, Description, DirectorName, ReleaseDate });
-                return user;
+                const movie = await models.Movie.create({ MovieName, Description, DirectorName, ReleaseDate });
+                return movie;
             } catch (err) {
-                console.log("error in createUser", err);
+                console.log("error in createMovie", err);
                 return null;
 
             }

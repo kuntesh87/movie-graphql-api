@@ -33,8 +33,8 @@ const typeDefs = `#graphql
   type Mutation {
     login(email: String!): User!,
     createUser(UserName: String!, EmailID: String!, Password: String!): User!
-    createReview(ID: Int, RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Review!
-    createMovie(ID: Int,MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!
+    createReview(RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Review!
+    createMovie(MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!
   }
 `;
 
