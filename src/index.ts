@@ -4,7 +4,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import * as models from './models/index.js';
 import resolvers from "./graphQL/reslovers.js";
 import typeDefs from './graphQL/schema.js';
-
+import { getUserByToken } from './controllers/user.js';
 
 dotenv.config();
 
@@ -21,9 +21,20 @@ const server = new ApolloServer({
 //  3. prepares your app to handle incoming requests
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
-  context: async () => ({
-    models: models
-  }),
+  context: async ({ req }) => {
+
+    // get the user token from the headers
+
+    const token = req.headers.authorization || '';
+
+    let user = null;
+    // try to retrieve a user with the token
+    if (token) {
+      user = await getUserByToken(token);
+    }
+
+    return { user, models }
+  },
 });
 
 console.log(`🚀  Server ready at: ${url}`);

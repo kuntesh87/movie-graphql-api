@@ -1,6 +1,7 @@
 import { updateMovie } from "../controllers/movie.js";
 import { updateReview } from "../controllers/review.js";
 import { login, signUp, changePassword } from "../controllers/user.js";
+import { GraphQLError } from 'graphql';
 
 const resolvers = {
     Query: {
@@ -38,7 +39,28 @@ const resolvers = {
             const user = await login(args);
             return user;
         },
-        createReview: async (root, { ID, RatingID, Comment, UserID, MovieID }, { models }) => {
+        changePassword: async (root, args, { models }) => {
+            const user = await changePassword(args);
+            return user;
+        },
+        createReview: async (root, { ID, RatingID, Comment, UserID, MovieID }, { models, user }) => {
+            if (!user)
+
+                // throwing a `GraphQLError` here allows us to specify an HTTP status code,
+
+                // standard `Error`s will have a 500 status code by default
+
+                throw new GraphQLError('User is not authenticated', {
+
+                    extensions: {
+
+                        code: 'UNAUTHENTICATED',
+
+                        http: { status: 401 },
+
+                    },
+
+                });
             try {
                 const review = await models.Review.create({ ID, RatingID, Comment, UserID, MovieID });
                 return review;
@@ -48,7 +70,25 @@ const resolvers = {
 
             }
         },
-        createMovie: async (root, { MovieName, Description, DirectorName, ReleaseDate }, { models }) => {
+        createMovie: async (root, { MovieName, Description, DirectorName, ReleaseDate }, { models, user }) => {
+            if (!user)
+
+                // throwing a `GraphQLError` here allows us to specify an HTTP status code,
+
+                // standard `Error`s will have a 500 status code by default
+
+                throw new GraphQLError('User is not authenticated', {
+
+                    extensions: {
+
+                        code: 'UNAUTHENTICATED',
+
+                        http: { status: 401 },
+
+                    },
+
+                });
+
             try {
                 const movie = await models.Movie.create({ MovieName, Description, DirectorName, ReleaseDate });
                 return movie;
@@ -58,7 +98,24 @@ const resolvers = {
 
             }
         },
-        updateMovie: async (root, args, { models }) => {
+        updateMovie: async (root, args, { models, user }) => {
+            if (!user)
+
+                // throwing a `GraphQLError` here allows us to specify an HTTP status code,
+
+                // standard `Error`s will have a 500 status code by default
+
+                throw new GraphQLError('User is not authenticated', {
+
+                    extensions: {
+
+                        code: 'UNAUTHENTICATED',
+
+                        http: { status: 401 },
+
+                    },
+
+                });
             try {
                 const movie = await updateMovie(args);
                 return movie;
@@ -68,7 +125,24 @@ const resolvers = {
 
             }
         },
-        deleteMovie: async (root, { ID }, { models }) => {
+        deleteMovie: async (root, { ID }, { models, user }) => {
+            if (!user)
+
+                // throwing a `GraphQLError` here allows us to specify an HTTP status code,
+
+                // standard `Error`s will have a 500 status code by default
+
+                throw new GraphQLError('User is not authenticated', {
+
+                    extensions: {
+
+                        code: 'UNAUTHENTICATED',
+
+                        http: { status: 401 },
+
+                    },
+
+                });
             try {
                 const deletedMovie = await models.Movie.destroy({
                     where: {
@@ -82,7 +156,24 @@ const resolvers = {
 
             }
         },
-        updateReview: async (root, args, { models }) => {
+        updateReview: async (root, args, { models, user }) => {
+            if (!user)
+
+                // throwing a `GraphQLError` here allows us to specify an HTTP status code,
+
+                // standard `Error`s will have a 500 status code by default
+
+                throw new GraphQLError('User is not authenticated', {
+
+                    extensions: {
+
+                        code: 'UNAUTHENTICATED',
+
+                        http: { status: 401 },
+
+                    },
+
+                });
             try {
                 const movie = await updateReview(args);
                 return movie;
@@ -92,7 +183,24 @@ const resolvers = {
 
             }
         },
-        deleteReview: async (root, { ID }, { models }) => {
+        deleteReview: async (root, { ID }, { models, user }) => {
+            if (!user)
+
+                // throwing a `GraphQLError` here allows us to specify an HTTP status code,
+
+                // standard `Error`s will have a 500 status code by default
+
+                throw new GraphQLError('User is not authenticated', {
+
+                    extensions: {
+
+                        code: 'UNAUTHENTICATED',
+
+                        http: { status: 401 },
+
+                    },
+
+                });
             try {
                 const deletedReview = await models.Review.destroy({
                     where: {

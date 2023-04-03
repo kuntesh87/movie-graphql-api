@@ -5,6 +5,7 @@ const typeDefs = `#graphql
     UserName: String!
   }
   type LoginedUser {
+    EmailID: String!
     Token: String!
   }
   type Review {
@@ -34,8 +35,9 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
-    login(UserName: String!, Password: String!): LoginedUser!,
+    login(EmailID: String!, Password: String!): LoginedUser!,
     signUp(UserName: String!, EmailID: String!, Password: String!): User!,
+    changePassword(EmailID: String!, CurrentPassword: String!, NewPassword: String!): Message!,
     createMovie(MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!,
     updateMovie(ID: String!,MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!,
     deleteMovie(ID: String!): Message!,

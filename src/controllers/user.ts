@@ -5,20 +5,16 @@ import { User } from "../models/index.js";
 
 const saltRounds = 10;
 
-type User = {
-    UserName: String,
-    Password: String
-}
 export const signUp = async ({ EmailID, UserName, Password }) => {
     const passwordHash = await bcrypt.hash(Password, saltRounds);
     const user = await User.create({ EmailID, UserName, Password: passwordHash });
     return user;
 }
 
-export const login = async ({ UserName, Password }) => {
+export const login = async ({ EmailID, Password }) => {
     let user = await User.findOne({
         where: {
-            UserName
+            EmailID
         }
     });
 
@@ -26,27 +22,25 @@ export const login = async ({ UserName, Password }) => {
     if (isPasswordCorrect) {
         const Token = jwt.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            data: UserName
+            data: EmailID
         }, process.env.JWT_SECRET);
 
         return {
-            UserName,
+            EmailID,
             Token
         }
     }
 }
 
-export const verifyToken = ({ token }) => {
-
-    try {
-        const verify = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("verify token", token);
-        return true;
-    } catch (error) {
-        console.log("Error in Verify Token");
-        return false;
-    }
-
+export const getUserByToken = async (token: string) => {
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+    const EmailID = decoded.data;
+    const userFromDB = await User.findOne({
+        where: {
+            EmailID
+        }
+    })
+    return userFromDB;
 }
 export const changePassword = async ({ UserName, CurrentPassword, NewPassword }) => {
 
@@ -59,7 +53,6 @@ export const changePassword = async ({ UserName, CurrentPassword, NewPassword })
     const isPasswordCorrect = await bcrypt.compare(CurrentPassword, user.Password);
     if (isPasswordCorrect) {
         const passwordHash = await bcrypt.hash(NewPassword, saltRounds);
-
         const updateUser = await User.update({ Password: passwordHash }, {
             where: {
                 UserName: UserName
