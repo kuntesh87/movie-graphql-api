@@ -1,5 +1,6 @@
 import { updateMovie } from "../controllers/movie.js";
-import { updateReview } from "src/controllers/review.js";
+import { updateReview } from "../controllers/review.js";
+import { login, signUp, changePassword } from "../controllers/user.js";
 
 const resolvers = {
     Query: {
@@ -23,9 +24,9 @@ const resolvers = {
         },
     },
     Mutation: {
-        signUp: async (root, { EmailID, UserName, Password }, { models }) => {
+        signUp: async (root, args, { models }) => {
             try {
-                const user = await models.User.create({ EmailID, UserName, Password });
+                const user = await signUp(args);
                 return user;
             } catch (err) {
                 console.log("error in createUser", err);
@@ -33,8 +34,9 @@ const resolvers = {
 
             }
         },
-        login: async (root, { UserName, Password }, { models }) => {
-
+        login: async (root, args, { models }) => {
+            const user = await login(args);
+            return user;
         },
         createReview: async (root, { ID, RatingID, Comment, UserID, MovieID }, { models }) => {
             try {

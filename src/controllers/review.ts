@@ -1,5 +1,4 @@
-import { Review } from "src/models/index.js";
-
+import { Review } from "../models/index.js";
 
 export const updateReview = async (data) => {
     const { ID } = data;

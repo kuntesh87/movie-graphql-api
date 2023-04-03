@@ -1,12 +1,15 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "src/models/index.js";
+import { User } from "../models/index.js";
 
 
 const saltRounds = 10;
 
+type User = {
+    UserName: String,
+    Password: String
+}
 export const signUp = async ({ EmailID, UserName, Password }) => {
-
     const passwordHash = await bcrypt.hash(Password, saltRounds);
     const user = await User.create({ EmailID, UserName, Password: passwordHash });
     return user;

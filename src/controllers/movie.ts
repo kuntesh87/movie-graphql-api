@@ -1,4 +1,4 @@
-import { Movie } from "src/models/index.js";
+import { Movie } from "../models/index.js";
 
 
 export const updateMovie = async (data) => {
