@@ -1,4 +1,4 @@
-import { updateMovie } from "../controllers/movie.js";
+import { updateMovie, searchedMovies } from "../controllers/movie.js";
 import { updateReview } from "../controllers/review.js";
 import { login, signUp, changePassword } from "../controllers/user.js";
 import { GraphQLError } from 'graphql';
@@ -19,6 +19,10 @@ const resolvers = {
             return models.Movie.findAll({
                 include: models.Review
             });
+        },
+        async searchMovie(root, args, { models }) {
+            const movies = await searchedMovies(args);
+            return movies;
         },
         async movie(root, { ID }, { models }) {
             return models.Movie.findById(ID);

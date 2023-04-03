@@ -32,6 +32,7 @@ const typeDefs = `#graphql
     allMovie: [Movie!]!
     movie(ID: Int!): Movie
     allReviewsByMovie(MovieID: Int!): [Review!]!
+    searchMovie(SearchText: String!,offset:Int, limit: Int) : [Movie]!
   }
 
   type Mutation {
@@ -44,6 +45,7 @@ const typeDefs = `#graphql
     createReview(RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Review!,
     updateReview(RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Movie!,
     deleteReview(ID: String!) : Message!
+   
   }
 `;
 
