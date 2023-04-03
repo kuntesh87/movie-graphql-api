@@ -1,26 +1,25 @@
+import { updateMovie } from "../controllers/movie.js";
+import { updateReview } from "src/controllers/review.js";
 
 const resolvers = {
     Query: {
-        async user(root, { id }, { models }) {
-            return models.User.findById(id);
-        },
-        async allUser(root, args, { models }) {
-            return models.User.findAll({
-                include: models.Review
-            });
-        },
-        async allReviews(root, args, { models }) {
+        async allReviewsByMovie(root, { MovieID }, { models }) {
             return models.Review.findAll({
-                include: models.Review
+                where: {
+                    MovieID
+                }
             });
         },
-        async review(root, { id }, { models }) {
-            return models.Review.findById(id);
+        async review(root, { ID }, { models }) {
+            return models.Review.findById(ID);
         },
-        async allMovie(root, { id }, { models }) {
+        async allMovie(root, args, { models }) {
             return models.Movie.findAll({
                 include: models.Review
             });
+        },
+        async movie(root, { ID }, { models }) {
+            return models.Movie.findById(ID);
         },
     },
     Mutation: {
@@ -34,8 +33,8 @@ const resolvers = {
 
             }
         },
-        login: async (root, {UserName, Password }, { models }) => {
-           
+        login: async (root, { UserName, Password }, { models }) => {
+
         },
         createReview: async (root, { ID, RatingID, Comment, UserID, MovieID }, { models }) => {
             try {
@@ -56,7 +55,56 @@ const resolvers = {
                 return null;
 
             }
-        }
+        },
+        updateMovie: async (root, args, { models }) => {
+            try {
+                const movie = await updateMovie(args);
+                return movie;
+            } catch (err) {
+                console.log("error in updateMovie", err);
+                return null;
+
+            }
+        },
+        deleteMovie: async (root, { ID }, { models }) => {
+            try {
+                const deletedMovie = await models.Movie.destroy({
+                    where: {
+                        ID: ID
+                    }
+                });
+                return deletedMovie;
+            } catch (err) {
+                console.log("error in deleteMovie", err);
+                return null;
+
+            }
+        },
+        updateReview: async (root, args, { models }) => {
+            try {
+                const movie = await updateReview(args);
+                return movie;
+            } catch (err) {
+                console.log("error in updateMovie", err);
+                return null;
+
+            }
+        },
+        deleteReview: async (root, { ID }, { models }) => {
+            try {
+                const deletedReview = await models.Review.destroy({
+                    where: {
+                        ID: ID
+                    }
+                });
+                return deletedReview;
+            } catch (err) {
+                console.log("error in deleteReview", err);
+                return null;
+
+            }
+        },
+
 
     }
 };
