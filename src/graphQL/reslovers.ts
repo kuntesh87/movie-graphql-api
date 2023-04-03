@@ -24,14 +24,7 @@ const resolvers = {
         },
     },
     Mutation: {
-        login: async (root, { email }, { models }) => {
-            const user = await models.User.findOne({ email });
-            if (user) {
-                user.token = Buffer.from(email).toString('base64');
-                return user;
-            }
-        },
-        createUser: async (root, { EmailID, UserName, Password }, { models }) => {
+        signUp: async (root, { EmailID, UserName, Password }, { models }) => {
             try {
                 const user = await models.User.create({ EmailID, UserName, Password });
                 return user;
@@ -40,6 +33,9 @@ const resolvers = {
                 return null;
 
             }
+        },
+        login: async (root, {UserName, Password }, { models }) => {
+           
         },
         createReview: async (root, { ID, RatingID, Comment, UserID, MovieID }, { models }) => {
             try {

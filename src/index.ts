@@ -1,9 +1,12 @@
+import * as dotenv from 'dotenv';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import * as models from './models/index.js';
 import resolvers from "./graphQL/reslovers.js";
 import typeDefs from './graphQL/schema.js';
 
+
+dotenv.config();
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
