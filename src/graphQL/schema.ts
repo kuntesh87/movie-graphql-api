@@ -23,6 +23,9 @@ const typeDefs = `#graphql
     ReleaseDate: String,
     reviews: [Review]
 }
+ type Message {
+  message: String!
+ }
   type Query {
     review(ID: Int!): Review
     allMovie: [Movie!]!
@@ -32,13 +35,13 @@ const typeDefs = `#graphql
 
   type Mutation {
     login(UserName: String!, Password: String!): LoginedUser!,
-    signUp(UserName: String!, EmailID: String!, Password: String!): User!
-    createMovie(MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!
-    updateMovie(ID: String!,MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!
-    deleteMovie(ID: String!)
-    createReview(RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Review!
-    updateReview(RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Movie!
-    deleteReview(ID: String!)
+    signUp(UserName: String!, EmailID: String!, Password: String!): User!,
+    createMovie(MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!,
+    updateMovie(ID: String!,MovieName: String,Description: String,DirectorName: String,ReleaseDate: String): Movie!,
+    deleteMovie(ID: String!): Message!,
+    createReview(RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Review!,
+    updateReview(RatingID: Int, Comment: String, UserID: Int,MovieID: Int): Movie!,
+    deleteReview(ID: String!) : Message!
   }
 `;
 
